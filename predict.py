@@ -29,6 +29,7 @@ from tlc_ultralytics import YOLO
 MODEL_WEIGHTS = "YOLOModel/best.pt"
 
 # Inference settings
+# Reducing confidence leads to a lower mAP@50 score. Could be from calculating it incorrectly
 CONFIDENCE_THRESHOLD = 0.5  # Confidence threshold for detections
 IMAGE_SIZE = 640  # Input image size (FIXED by competition)
 DEVICE = 0  # GPU device (0 for first GPU, 'cpu' for CPU)
