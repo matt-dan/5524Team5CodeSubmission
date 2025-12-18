@@ -29,12 +29,12 @@ from tlc_ultralytics import YOLO
 MODEL_WEIGHTS = "YOLOModel/best.pt"
 
 # Inference settings
-CONFIDENCE_THRESHOLD = 0  # Confidence threshold for detections
+CONFIDENCE_THRESHOLD = 0.5  # Confidence threshold for detections
 IMAGE_SIZE = 640  # Input image size (FIXED by competition)
 DEVICE = 0  # GPU device (0 for first GPU, 'cpu' for CPU)
 
 # Output
-OUTPUT_CSV = "submission.csv"  # Output submission file
+OUTPUT_CSV = "predictions.csv"  # Output submission file
 
 # ============================================================================
 # PREDICTION PIPELINE - No need to edit below this line

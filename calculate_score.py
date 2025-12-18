@@ -179,5 +179,5 @@ def calculate_map(solution_path, submission_path):
         print(f"\nFinal mAP@0.5: {np.mean(aps):.4f}")
 
 # --- UPDATE FILENAMES HERE ---
-calculate_map('test/partial_test_labels.csv', 'submission.csv')
+calculate_map('test/partial_test_labels.csv', 'predictions.csv')
 
