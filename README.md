@@ -2,6 +2,7 @@
 
 ## Google Colab Link:
 [https://drive.google.com/drive/folders/1MH8K9tMeCvb1CLYaCCRPuX_JUuGoh8D2?usp=drive_link](https://colab.research.google.com/drive/1MlfNSj5E_J33FAcndicUizUB6hml6o8K?usp=sharing)
+Make sure to modify all file paths to match the structure you have within your drive before running it.
 ## Google Drive Link:
 https://drive.google.com/drive/folders/1MH8K9tMeCvb1CLYaCCRPuX_JUuGoh8D2?usp=sharing
 
