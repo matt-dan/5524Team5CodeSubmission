@@ -24,3 +24,6 @@ Use calculate_score.py to calculate mAP score
 ## Test Images:
 Images can be found at ./test/images
 Labels can be found at ./test/partial_test_labels.csv
+
+## Note
+For some reason, increasing the confidence variable within predict.py will lead to worse mAP@50 scores even though it leads to better predictions in the process. There is potentially a bug within the calculate_score.py file that needs to be fixed in the future.
