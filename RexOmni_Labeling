@@ -1,0 +1,86 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
+"""
+Basic object detection example using Rex Omni
+"""
+import os
+import torch
+from PIL import Image
+from rex_omni import RexOmniVisualize, RexOmniWrapper
+
+
+def main():
+    # Model path - replace with your actual model path
+    model_path = "/content/drive/MyDrive/Colab Notebooks/ColabData/Rex-Omni/finetuning/work_dirs/sft/checkpoint-675"
+    image_dir = "/content/drive/MyDrive/Colab Notebooks/ColabData/train/images"
+    label_dir = "/content/drive/MyDrive/Colab Notebooks/ColabData/rex_outputs/rexLabels"
+
+    os.makedirs(label_dir, exist_ok=True)
+
+
+
+    # Create wrapper with custom parameters
+    rex_model = RexOmniWrapper(
+        model_path=model_path,
+        backend="transformers",  # or "vllm" for faster inference
+        max_tokens=4096,
+        temperature=0.0,
+        top_p=0.05,
+        top_k=1,
+        repetition_penalty=1.05,
+    )
+
+
+    image_files = [f for f in os.listdir(image_dir)
+               if f.lower().endswith((".jpg", ".png", ".jpeg"))]
+
+    for fname in image_files:
+        image_path = os.path.join(image_dir, fname)
+        image = Image.open(image_path).convert("RGB")
+
+        # Object detection
+        categories = [
+            "carpetweed",
+            "morning glory",
+            "palmer amaranth"
+        ]
+
+        results = rex_model.inference(images=image, task="detection", categories=categories)
+
+        result = results[0]
+        if result["success"]:
+            predictions = result["extracted_predictions"]
+
+            label_output_path = os.path.join(
+                label_dir,
+                os.path.splitext(fname)[0] + ".txt"
+            )
+
+            img_width, img_height = image.size
+            yolo_lines = []
+
+            for cls_idx, category in enumerate(categories):
+                boxes = predictions.get(category, [])
+                for box in boxes:
+                    coords = box["coords"]
+                    if len(coords) != 4:
+                        continue  # skip malformed boxes
+
+                    x0, y0, x1, y1 = coords
+                    x_center = (x0 + x1) / 2 / img_width
+                    y_center = (y0 + y1) / 2 / img_height
+                    w = (x1 - x0) / img_width
+                    h = (y1 - y0) / img_height
+                    yolo_lines.append(f"{cls_idx} {x_center} {y_center} {w} {h}")
+
+            with open(label_output_path, "w") as f:
+                f.write("\n".join(yolo_lines))
+
+        print(result)
+
+
+if __name__ == "__main__":
+    main()
+
