@@ -19,7 +19,7 @@ def main():
 
     os.makedirs(label_dir, exist_ok=True)
 
-
+    single_image = "/content/drive/MyDrive/Colab Notebooks/ColabData/train/images/20190613_6062W_CM_11.jpg"
 
     # Create wrapper with custom parameters
     rex_model = RexOmniWrapper(
@@ -32,25 +32,21 @@ def main():
         repetition_penalty=1.05,
     )
 
+    fname = single_image
+    image_path = os.path.join(image_dir, fname)
+    image = Image.open(image_path).convert("RGB")
 
-    image_files = [f for f in os.listdir(image_dir)
-               if f.lower().endswith((".jpg", ".png", ".jpeg"))]
-
-    for fname in image_files:
-        image_path = os.path.join(image_dir, fname)
-        image = Image.open(image_path).convert("RGB")
-
-        # Object detection
-        categories = [
+    # Object detection
+    categories = [
             "carpetweed",
             "morning glory",
             "palmer amaranth"
         ]
 
-        results = rex_model.inference(images=image, task="detection", categories=categories)
+    results = rex_model.inference(images=image, task="detection", categories=categories)
 
-        result = results[0]
-        if result["success"]:
+    result = results[0]
+    if result["success"]:
             predictions = result["extracted_predictions"]
 
             label_output_path = os.path.join(
@@ -78,7 +74,7 @@ def main():
             with open(label_output_path, "w") as f:
                 f.write("\n".join(yolo_lines))
 
-        print(result)
+    print(result)
 
 
 if __name__ == "__main__":
