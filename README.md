@@ -8,6 +8,7 @@ https://drive.google.com/drive/folders/1MH8K9tMeCvb1CLYaCCRPuX_JUuGoh8D2?usp=sha
 
 ## RexOmni Installation Commands:
 * pip install torch==2.7.0 torchvision --index-url https://download.pytorch.org/whl/cu128
+* cd into the Rex-Omni folder
 * pip install -r requirements.txt
 * pip install -v -e .
 
