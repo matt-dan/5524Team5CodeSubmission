@@ -13,7 +13,6 @@ def parse_prediction_string(s, with_conf=False):
     parts = s.strip().split()
     boxes = []
     
-    # Determine step size (5 for GT, 6 for Predictions with confidence)
     step = 6 if with_conf else 5
     
     for i in range(0, len(parts), step):
@@ -77,7 +76,6 @@ def calculate_map(solution_path, submission_path):
     merged = pd.merge(gt_df, pred_df, on='image_id', suffixes=('_gt', '_pred'))
     print(f"Evaluating on {len(merged)} images...")
 
-    # --- FIX: Robust Class Extraction ---
     classes = set()
     for s in merged['prediction_string_gt']:
         boxes = parse_prediction_string(s, with_conf=False)
@@ -181,5 +179,5 @@ def calculate_map(solution_path, submission_path):
         print(f"\nFinal mAP@0.5: {np.mean(aps):.4f}")
 
 # --- UPDATE FILENAMES HERE ---
-calculate_map('test/solution (1).csv', 'submission_sgd_20.csv')
+calculate_map('test/partial_test_labels.csv', 'submission.csv')
 

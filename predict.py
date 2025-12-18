@@ -177,13 +177,6 @@ def main():
     print(f" Model: {weights_path}")
     print(f"  Confidence: {CONFIDENCE_THRESHOLD}")
 
-    print("\n Next Steps:")
-    print(f"   1. Upload '{OUTPUT_CSV}' to Kaggle")
-    print("   2. Check your leaderboard score")
-    print("   3. Analyze errors in Dashboard")
-    print("   4. Fix data issues and retrain!")
-    print("\n You have 3 submissions per day - use them wisely!")
-
 
 if __name__ == "__main__":
     main()
