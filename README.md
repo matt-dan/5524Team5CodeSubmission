@@ -2,6 +2,8 @@
 
 ## Google Colab Link:
 https://drive.google.com/drive/folders/1MH8K9tMeCvb1CLYaCCRPuX_JUuGoh8D2?usp=drive_link
+## Google Drive Link:
+https://drive.google.com/drive/folders/1MH8K9tMeCvb1CLYaCCRPuX_JUuGoh8D2?usp=sharing
 
 ## RexOmni Installation Commands:
 * pip install torch==2.7.0 torchvision --index-url https://download.pytorch.org/whl/cu128
